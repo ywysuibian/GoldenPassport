@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="16096" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14109"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="16096"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -18,6 +18,7 @@
             <connections>
                 <outlet property="addMenuItem" destination="EIF-pz-Vhv" id="ggY-0B-u8X"/>
                 <outlet property="deleteMenuItem" destination="EUi-mw-GQs" id="2TY-Hu-a2x"/>
+                <outlet property="editMenuItem" destination="XID-1y-EKr" id="vbc-tH-c2K"/>
                 <outlet property="enableAutoStart" destination="HPl-pR-Wll" id="xTs-Uv-k57"/>
                 <outlet property="exportMenuItem" destination="QDc-eW-cqJ" id="XLZ-7W-zAJ"/>
                 <outlet property="httpServerSwitch" destination="6Dm-32-chD" id="Lmr-Da-wvH"/>
@@ -35,6 +36,12 @@
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
                         <action selector="addVerifyClicked:" target="A7z-EV-ZJb" id="IHB-KI-tF5"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="编辑" keyEquivalent="m" id="XID-1y-EKr">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="editClicked:" target="A7z-EV-ZJb" id="Flg-kT-sgm"/>
                     </connections>
                 </menuItem>
                 <menuItem title="删除" keyEquivalent="d" id="EUi-mw-GQs">

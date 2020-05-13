@@ -12,6 +12,9 @@ import CoreImage
 class AddVerifyKeyWindow: NSWindowController, NSWindowDelegate {
     @IBOutlet weak var otpTextField: NSTextField!
     @IBOutlet weak var tagTextField: NSTextField!
+    @IBOutlet weak var okBtn: NSButton!
+    
+    private var editForKey = ""
     
     override var windowNibName : String! {
         return "AddVerifyKeyWindow"
@@ -31,6 +34,25 @@ class AddVerifyKeyWindow: NSWindowController, NSWindowDelegate {
     func clearTextField() {
         otpTextField.stringValue = ""
         tagTextField.stringValue = ""
+        editForKey = ""
+        okBtn.title = "添加"
+    }
+    
+    func editFor(key: String) {
+        editForKey = key
+        okBtn.title = "修改"
+        let url = DataManager.shared.getOTPAuthURL(tag: key)
+        if url != "" {
+            tagTextField.stringValue = key
+            otpTextField.stringValue = url
+        } else {
+            let alert: NSAlert = NSAlert()
+            alert.addButton(withTitle: "确定")
+            alert.alertStyle = NSAlert.Style.warning
+            alert.messageText = "找不到[" + key + "]对应的OTP URL！"
+            alert.alertStyle = NSAlert.Style.warning
+            alert.runModal()
+        }
     }
     
     @IBAction func selectPicClicked(_ sender: NSButton) {
@@ -78,13 +100,21 @@ class AddVerifyKeyWindow: NSWindowController, NSWindowDelegate {
         }
         
         if isValid {
+            var notityStr = "VerifyKeyAdded"
+            var actionStr = "添加"
+            if editForKey != "" {
+                DataManager.shared.removeOTPAuthURL(tag: editForKey)
+                notityStr = "VerifyKeyEdited"
+                actionStr = "编辑"
+            }
             DataManager.shared.addOTPAuthURL(tag: tag, url: url)
             
             let notificationCenter = NotificationCenter.default
-            notificationCenter.post(name: NSNotification.Name(rawValue: "VerifyKeyAdded"), object: nil)
+            notificationCenter.post(name: NSNotification.Name(rawValue: notityStr), object: nil)
+            
             self.window?.close()
             
-            alert.messageText = "添加成功，请到状态栏菜单查看。"
+            alert.messageText = actionStr + "成功，请到状态栏菜单查看。"
         } else {
             alert.messageText = "无法解析密钥，请检查OTPAuth URL。"
             alert.alertStyle = NSAlert.Style.warning

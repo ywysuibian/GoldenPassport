@@ -32,8 +32,13 @@ final class DataManager {
         authData.removeValue(forKey: tag)
         saveData(authDataFile, data: authData)
     }
+    
+    func getOTPAuthURL(tag: String) -> String {
+        let url = authData[tag]
+        return url!
+    }
 
-    func allAuthCode() -> [String: String] {
+    func allAuthCode() -> [(key: String, value: String)] {
         var result: [String: String] = [:]
         for d in authData {
             let url = d.value
@@ -48,7 +53,9 @@ final class DataManager {
 
             result[d.key] = code
         }
-        return result
+        return result.sorted { (r1, r2) -> Bool in
+            return r1.key < r2.key
+        }
     }
 
     func dataCount() -> Int {

@@ -30,7 +30,9 @@ public func httpServer() -> HttpServer {
     server["/code/:key"] = { r in
         let key = r.params[":key"]
         let allCodes = DataManager.shared.allAuthCode()
-        if let code = allCodes[key!] {
+        if let code = allCodes.first(where: { (c) -> Bool in
+            return c.key == key
+            })?.value {
             return HttpResponse.ok(.text(code))
         } else {
             return HttpResponse.ok(.text("key does not exists!"))

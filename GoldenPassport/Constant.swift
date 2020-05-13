@@ -12,6 +12,10 @@ let EXPIRE_TIME_STR = "过期时间: "
 
 let COPY_AUTH_CODE_STR = "点击复制验证码"
 let DELETE_VERIFY_KEY_STR = "点击删除认证记录"
+let EDIT_VERIFY_KEY_STR = "点击编辑认证记录"
+
+let DONE_EDIT_STR = "完成编辑"
+let EDIT_STR = "编辑"
 
 let DONE_REMOVE_STR = "完成删除"
 let REMOVE_STR = "删除"
